@@ -7,9 +7,7 @@ public class EnemyAI : MonoBehaviour
     public float Speed;
     public float ObstacleRande;
     public bool Alive = true;
-
-    [SerializeField]
-    private GameObject[] _fireballsPrefab;
+    [SerializeField] private GameObject[] _fireballsPrefab;
     private GameObject _fireball;
 
     void Start()

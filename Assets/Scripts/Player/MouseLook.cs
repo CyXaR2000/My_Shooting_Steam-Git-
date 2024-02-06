@@ -21,6 +21,14 @@ public class MouseLook : MonoBehaviour
     private float _rotationX = 0;
     public Rigidbody PlayerRigidbody;
 
+    public float Amount;
+    public float Speed;
+    public bool Swing = false;
+    private Vector3 _startPos;
+    private float _distantion;
+    private Vector3 _rotation = Vector3.zero;
+
+
     void Start()
     {
         PlayerRigidbody = GetComponent<Rigidbody>();
@@ -28,6 +36,7 @@ public class MouseLook : MonoBehaviour
         {
             PlayerRigidbody.freezeRotation = true;
         }
+        _startPos = transform.position;
     }
 
     void Update()
@@ -56,6 +65,14 @@ public class MouseLook : MonoBehaviour
 
             float _rotationY = transform.localEulerAngles.y;
             transform.localEulerAngles = new Vector3(_rotationX, _rotationY, 0);
+        }
+
+        if (Swing == true)
+        {
+            _distantion += (transform.position - _startPos).magnitude;
+            _startPos = transform.position;
+            _rotation.z = Mathf.Sin(_distantion * Speed) * Amount;
+            transform.localEulerAngles = _rotation;
         }
 
     }
